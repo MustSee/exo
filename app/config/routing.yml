@@ -1,0 +1,4 @@
+tiny_url_main:
+    resource: "@TinyUrlMainBundle/Resources/config/routing.yml"
+    prefix:   /
+

@@ -1,0 +1,9 @@
+tiny_url_main_homepage:
+    path:     /
+    defaults: { _controller: TinyUrlMainBundle:Default:index }
+
+tiny_url_main_redirect:
+    path:    /{shortcode}
+    defaults:  { _controller: TinyUrlMainBundle:Default:redirect}
+    requirements:
+      shortcode: "[A-Za-z0-9]{6}"

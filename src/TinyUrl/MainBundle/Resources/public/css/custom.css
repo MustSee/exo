@@ -1,0 +1,23 @@
+div.container {
+    padding-top: 50px;
+}
+
+tbody > tr:nth-child(1):hover {
+    background-color: white;
+}
+
+table tr:not(:first-child) {
+    cursor : pointer;
+}
+
+form {
+    padding-bottom: 100px;
+}
+
+#tinyurl_mainbundle_link_longUrl:focus {
+    border-color: red;
+}
+
+#tinyurl_mainbundle_link_valider {
+    margin-top: 30px;
+}
