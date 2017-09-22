@@ -10,18 +10,4 @@ namespace TinyUrl\MainBundle\Repository;
  */
 class LinkRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function updateCounter($shortCodeClick) {
-        $q = $this->getEntityManager()
-            ->createQuery('UPDATE TinyUrlMainBundle:Link l SET l.counter = 5 WHERE l.shortCode = :shortCodeClick')
-        ->setParameter('shortCodeClick', $shortCodeClick);
-        return $q->getResult();
-    }
-
-//    public function updateCounter($shortCodeClick) {
-//        $q = $this->createQueryBuilder('l')
-//            ->update('TinyUrlMainBundle:Link.cp',  'l')
-//            ->where('l.shortCode = :shortCodeClick')
-//            ->setParameter('shortCodeClick', $shortCodeClick);
-//        return $q->getQuery()->getResult();
-//    }
 }

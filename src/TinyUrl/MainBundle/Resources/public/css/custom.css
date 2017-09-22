@@ -1,23 +1,37 @@
 div.container {
-    padding-top: 50px;
+    padding-top: 100px;
 }
 
-tbody > tr:nth-child(1):hover {
-    background-color: white;
-}
-
-table tr:not(:first-child) {
-    cursor : pointer;
-}
+/* FORMULAIRE */
 
 form {
     padding-bottom: 100px;
+    width: 50%;
+    margin: auto;
+}
+
+#tinyurl_mainbundle_link > div:nth-child(1) > label {
+    font-size: xx-large;
 }
 
 #tinyurl_mainbundle_link_longUrl:focus {
-    border-color: red;
+    border-color: palevioletred;
+    background-color: lightyellow;
 }
 
 #tinyurl_mainbundle_link_valider {
     margin-top: 30px;
+}
+
+
+
+/* TABLEAU */
+
+td, th {
+    text-align: center;
+    /* Il faut setter une max-width pour que les td soient de même taille, mais pk ? */
+    max-width: 33px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

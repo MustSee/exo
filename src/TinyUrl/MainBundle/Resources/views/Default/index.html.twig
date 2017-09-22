@@ -1,38 +1,33 @@
 {% extends "TinyUrlMainBundle::n1.html.twig" %}
 
 {% block body %}
-    <div class="container">
-            {% for message in app.flashes('noMatchFound') %}
-                <div class="alert alert-danger" role="alert">
-                    <p>{{ message }}</p>
-                </div>
-            {% endfor %}
 
             {{ form_start(form) }}
             {{ form_widget(form) }}
             {{ form_end(form) }}
 
+
         <div class="row">
 
-            <h2>Les liens : </h2>
+            <h2>Liens -> </h2>
             <table class="table table-hover">
-                <tr>
+                <thead>
                     <th>URL</th>
                     <th>ShortCode</th>
-                    <th>ShortCode crée le</th>
-                    <th>Compteur</th>
-                </tr>
+                    <th>Crée le</th>
+                    <th>Nbr de vues</th>
+                    <th>Supprimer</th>
+                </thead>
                 {% for element in links %}
                     <tr>
                         <td>{{ element.longUrl }}</td>
                         <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
                         <td>{{ element.createdAt|date('Y-m-d') }}</td>
                         <td>{{ element.counter }}</td>
+                        <td><a href="{{ path('tiny_url_main_delete', {'id': element.id })}}">X</a></td>
                     </tr>
                 {% endfor %}
             </table>
-            </table>
         </div>
 
-    </div><!-- div.container -->
 {% endblock %}

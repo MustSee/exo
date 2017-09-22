@@ -7,3 +7,9 @@ tiny_url_main_redirect:
     defaults:  { _controller: TinyUrlMainBundle:Default:redirect}
     requirements:
       shortcode: "[A-Za-z0-9]{6}"
+
+tiny_url_main_delete:
+    path:    /{id}
+    defaults:  { _controller: TinyUrlMainBundle:Default:delete}
+    requirements:
+      id: \d+
