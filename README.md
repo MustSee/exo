@@ -8,6 +8,8 @@ Après avoir récupéré le code en clonant le dépôt GIT ou en téléchargeant
 <h5>1. Définir vos paramètres d'application</h5>
 Pour ne pas qu'on se partage tous nos mots de passe, le fichier app/config/parameters.yml est ignoré dans ce dépôt. A la place, vous avez le fichier parameters.yml.dist que vous devez renommer (enlevez le .dist) et modifier.
 <h5>2. Télécharger les vendors</h5>
+https://getcomposer.org/
+
 Avec composer : 
 $ php composer.phar install
 <h5>3. Créer la base de données</h5>
@@ -22,5 +24,6 @@ $ php bin/console doctrine:schema:update --dump-sql
 
 $ php bin/console doctrine:schema:update --force
 <h5>4. Publiez les assets dans le répertoire web</h5>
+
 $ php bin/console assets:install --symlink
 

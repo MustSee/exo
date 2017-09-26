@@ -37,7 +37,9 @@ class DefaultController extends Controller
                 $this->addFlash('error', 'Ce lien existe déjà');
                 return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
             }
+
             $em->persist($form->getData());
+
             $em->flush();
             $this->addFlash('success', 'Un shortcode a été crée !');
         }
@@ -63,7 +65,6 @@ class DefaultController extends Controller
         $lien = $linkToRepo->findOneBy([
             'shortCode'=>$shortcode
         ]);
-
 
         if( !$lien) {
             // Si la base de donnée ne renvoie rien

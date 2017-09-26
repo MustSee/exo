@@ -3,6 +3,7 @@
 namespace TinyUrl\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TinyUrl\MainBundle\Helpers\StringUtils;
 
 /**
  * Link
@@ -12,14 +13,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Link
 {
-
-    public function __construct()
-    {
-        $this->setCreatedAt(new \DateTime());
-        $this->setCounter(0);
-        $this->setShortCode(generateRandomString());
-    }
-
     /**
      * @var int
      *
@@ -57,6 +50,12 @@ class Link
      */
     private $counter;
 
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime());
+        $this->setCounter(0);
+        $this->setShortCode(StringUtils::generateRandomString());
+    }
 
     /**
      * Get id
@@ -164,32 +163,3 @@ class Link
         return $this->counter;
     }
 }
-
-
-function generateRandomString($length = 6) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
-
-/*    if (checkIfAlreadyExists ($randomString) == false) {
-        return $randomString;
-    } else {
-        generateRandomString();
-    }*/
-
-}
-/*
-function checkIfAlreadyExists($randomShortCode) {
-    $shortCode = $this->get('doctrine')
-        ->getRepository('TinyUrl\MainBundle\Entity\Link')
-        ->findOneBy(array('shortCode'=>$randomShortCode));
-    if($shortCode == null) {
-        return false;
-    } else {
-        return true;
-    }
-}*/
