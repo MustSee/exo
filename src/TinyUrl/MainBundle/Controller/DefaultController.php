@@ -49,13 +49,13 @@ class DefaultController extends Controller
                 'shortCode'=>$link->getShortCode()
             ]);
 
-            if (!$isUrlAlreadyExisting OR !$isShortCodeAlreadyExisting ) {
+            if ($isUrlAlreadyExisting !== null or $isShortCodeAlreadyExisting !== null ) {
                 $this->addFlash('error', 'L\'url ou le ShortCode existent déjà dans la BDD.');
-            } else {
-                $em->persist($form->getData());
-                $em->flush();
-                $this->addFlash('success', 'Un shortcode a été crée !');
+                return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
             }
+            $em->persist($link);
+            $em->flush();
+            $this->addFlash('success', 'Un shortcode a été crée !');
 
         }
 
