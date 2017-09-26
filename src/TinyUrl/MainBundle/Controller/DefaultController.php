@@ -7,33 +7,49 @@ use Symfony\Component\HttpFoundation\Request;
 use TinyUrl\MainBundle\Entity\Link;
 use TinyUrl\MainBundle\Form\LinkType;
 use TinyUrl\MainBundle\Form\FormHandler;
+use TinyUrl\MainBundle\TinyUrlMainBundle;
 
 
 class DefaultController extends Controller
 {
     public function indexAction(Request $request)
     {
+        // Attention à la présention du code, et à rester constant
+
+        //On crée au début de l'action l'appel/les appels au repository
+        // On crée deux variables réutilisables
+        $em = $this->get('doctrine')->getManager();
+        $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
 
         // Création du formulaire
         $form = $this->createForm(LinkType::class, new Link());
 
         // On récupère tous les liens de la BDD
-        $links = $this->get('doctrine')
-            ->getRepository('TinyUrlMainBundle:Link')
-            ->findAll();
+        // Pour la scalabilité écrire une fonction qui limite aux 10 derniers liens
+        // Ou les liens les plus populaires...
+        $links = $linkToRepo->findAll();
 
-        $datas = ['form'=>$form->createView(), 'links'=>$links];
-
-        // Appel à la BDD lorsque le formulaire est validé
-        $em = $this->get('doctrine')->getManager();
-        $formHandler = new FormHandler($form, $request, $em);
-        if ($formHandler->process()) {
-            $this->addFlash('success', 'Un shortCode a été crée !');
-            return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
+        // Traitement du formulaire
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            if(false) {
+                // Utiliser des types de messages flash réutilisable
+                $this->addFlash('error', 'Ce lien existe déjà');
+                return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
+            }
+            $em->persist($form->getData());
+            $em->flush();
+            $this->addFlash('success', 'Un shortcode a été crée !');
         }
 
-        return $this->render('TinyUrlMainBundle:Default:index.html.twig', $datas);
+        // Bien présenter les données que l'on retourne avec la vue
+        // pour ce soit facilement lisible
+        return $this->render('TinyUrlMainBundle:Default:index.html.twig', [
+                'form'=>$form->createView(),
+                'links'=>$links
+            ]);
     }
+
 
 
     public function redirectAction($shortcode) {
@@ -49,7 +65,7 @@ class DefaultController extends Controller
             $counter = $lien->getCounter();
             $lien->setCounter($counter + 1);
             $em->flush();
-            return $this->redirect($lien->getLongUrl(), 301);
+            return $this->redirect($lien->getLongUrl(), 302);
 
         } else {
 

@@ -174,4 +174,22 @@ function generateRandomString($length = 6) {
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomString;
+
+/*    if (checkIfAlreadyExists ($randomString) == false) {
+        return $randomString;
+    } else {
+        generateRandomString();
+    }*/
+
 }
+/*
+function checkIfAlreadyExists($randomShortCode) {
+    $shortCode = $this->get('doctrine')
+        ->getRepository('TinyUrl\MainBundle\Entity\Link')
+        ->findOneBy(array('shortCode'=>$randomShortCode));
+    if($shortCode == null) {
+        return false;
+    } else {
+        return true;
+    }
+}*/
