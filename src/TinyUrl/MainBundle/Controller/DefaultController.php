@@ -3,6 +3,7 @@
 namespace TinyUrl\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 use TinyUrl\MainBundle\Entity\Link;
 use TinyUrl\MainBundle\Form\LinkType;
@@ -53,26 +54,27 @@ class DefaultController extends Controller
 
 
     public function redirectAction($shortcode) {
+        // Toujours au début de l'action :
+        // On fait appel au manager de Doctrine et on variabilise la/les repository/tories
+        $em= $this->get('doctrine')->getManager();
+        $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
+
         // On récupère l'entité correspondant au paramètre
-        $lien = $this->get('doctrine')
-            ->getRepository('TinyUrlMainBundle:Link')
-            ->findOneBy(array('shortCode'=>$shortcode));
+        $lien = $linkToRepo->findOneBy([
+            'shortCode'=>$shortcode
+        ]);
 
 
-        if($lien) {
-            // On incrémente le compteur du lien lorsque le shortCode est cliqué
-            $em = $this->get('doctrine')->getManager();
-            $counter = $lien->getCounter();
-            $lien->setCounter($counter + 1);
-            $em->flush();
-            return $this->redirect($lien->getLongUrl(), 302);
-
-        } else {
-
+        if( !$lien) {
             // Si la base de donnée ne renvoie rien
             $this->addFlash('noMatchFound', 'Ce shortcode n\'existe pas !');
             return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
         }
+
+        // On incrémente le compteur du lien lorsque le shortCode est cliqué
+        $linkToRepo->incrementCounter($lien);
+        return $this->redirect($lien->getLongUrl(), 302);
+
     }
 
     public function deleteAction(Link $link) // Param converter

@@ -1,6 +1,7 @@
 <?php
 
 namespace TinyUrl\MainBundle\Repository;
+use TinyUrl\MainBundle\Entity\Link;
 
 /**
  * LinkRepository
@@ -22,6 +23,16 @@ class LinkRepository extends \Doctrine\ORM\EntityRepository
         return $this->createQueryBuilder('l')
             ->orderBy('l.createdAt', 'DESC')
             ->setMaxResults(5)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function incrementCounter(Link $lien) {
+        return $this->createQueryBuilder('l')
+            ->update('TinyUrlMainBundle:Link', 'l')
+            ->set('l.counter', 'l.counter + 1')
+            ->where('l = :lien')
+            ->setParameter('lien', $lien)
             ->getQuery()
             ->execute();
     }
