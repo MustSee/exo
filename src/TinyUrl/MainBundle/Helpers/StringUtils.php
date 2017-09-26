@@ -15,16 +15,4 @@ class StringUtils
         return $randomString;
     }
 
-    /*function checkIfAlreadyExists($randomShortCode)
-    {
-        $shortCode = $this->get('doctrine')
-            ->getRepository('TinyUrl\MainBundle\Entity\Link')
-            ->findOneBy(array('shortCode' => $randomShortCode));
-        if ($shortCode == null) {
-            return false;
-        } else {
-            return true;
-        }
-    }*/
-
 }

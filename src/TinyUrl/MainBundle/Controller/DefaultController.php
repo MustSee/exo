@@ -3,7 +3,6 @@
 namespace TinyUrl\MainBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 use TinyUrl\MainBundle\Entity\Link;
 use TinyUrl\MainBundle\Form\LinkType;
@@ -30,18 +29,34 @@ class DefaultController extends Controller
         $lastAddedLinks = $linkToRepo->findLastAddedLinks();
 
         // Traitement du formulaire
+        $link = new Link();
+
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             if(false) {
                 // Utiliser des types de messages flash réutilisable
-                $this->addFlash('error', 'Ce lien existe déjà');
+                $this->addFlash('error', 'Le formulaire n\'est pas valide.');
                 return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
             }
 
-            $em->persist($form->getData());
+            $link = $form->getData();
+            // On vérifie si l'URL long n'est pas déjà dans la BDD
+            $isUrlAlreadyExisting = $linkToRepo->findOneBy([
+                'longUrl'=>$link->getlongUrl()
+            ]);
+            // On vérifie si le ShortCode n'est pas déjà dans la BDD
+            $isShortCodeAlreadyExisting = $linkToRepo->findOneBy([
+                'shortCode'=>$link->getShortCode()
+            ]);
 
-            $em->flush();
-            $this->addFlash('success', 'Un shortcode a été crée !');
+            if (!$isUrlAlreadyExisting OR !$isShortCodeAlreadyExisting ) {
+                $this->addFlash('error', 'L\'url ou le ShortCode existent déjà dans la BDD.');
+            } else {
+                $em->persist($form->getData());
+                $em->flush();
+                $this->addFlash('success', 'Un shortcode a été crée !');
+            }
+
         }
 
         // Bien présenter les données que l'on retourne avec la vue
