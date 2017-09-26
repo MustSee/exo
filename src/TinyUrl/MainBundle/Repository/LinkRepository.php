@@ -10,4 +10,19 @@ namespace TinyUrl\MainBundle\Repository;
  */
 class LinkRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findPopularLinks() {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.counter', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->execute();
+    }
+
+    public function findLastAddedLinks() {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.createdAt', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->execute();
+    }
 }

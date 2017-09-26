@@ -2,34 +2,58 @@
 
 {% block body %}
 
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
-            {{ form_end(form) }}
+    {{ form_start(form) }}
+    {{ form_row(form.longUrl) }}
+    {{ form_row(form.valider) }}
+    {{ form_end(form) }}
 
 
-        <div class="row">
-
-            <h2>Liens -> </h2>
-            <table class="table table-hover">
+    <div class="row">
+        <div class="col-5">
+            <h2>Derniers liens ajoutés -> </h2>
+            <table class="table table-hover lastLinks">
                 <thead>
                 <tr>
-                    <th>URL</th>
-                    <th>ShortCode</th>
-                    <th>Crée le</th>
-                    <th>Nbr de vues</th>
-                    <th>Supprimer</th>
+                    <th class="col-4">URL</th>
+                    <th class="col-4">ShortCode</th>
+                    <th class="col-4">Crée le</th>
                 </tr>
                 </thead>
-                {% for element in links %}
+                <tbody>
+                {% for element in lastAddedLinks %}
                     <tr>
                         <td>{{ element.longUrl }}</td>
                         <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
-                        <td>{{ element.createdAt|date('Y-m-d') }}</td>
-                        <td>{{ element.counter }}</td>
-                        <td><a href="{{ path('tiny_url_main_delete', {'id': element.id })}}">X</a></td>
+                        <td>{{ element.createdAt|date('d-m') }}</td>
                     </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
+        <div class="col-5 offset-2">
+            <h2>Liens les plus populaires -></h2>
+            <table class="table table-hover popularLinks">
+                <thead>
+                <tr>
+                    <th class="col-4">URL</th>
+                    <th class="col-4">ShortCode</th>
+                    <th class="col-4">Nbr de vues</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in popularLinks %}
+                    <tr>
+                        <td>{{ element.longUrl }}</td>
+                        <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
+                        <td>{{ element.counter }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    </div><!-- div.row -->
 
 {% endblock %}

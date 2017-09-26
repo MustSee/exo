@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use TinyUrl\MainBundle\Entity\Link;
 use TinyUrl\MainBundle\Form\LinkType;
-use TinyUrl\MainBundle\Form\FormHandler;
-use TinyUrl\MainBundle\TinyUrlMainBundle;
 
 
 class DefaultController extends Controller
@@ -27,7 +25,8 @@ class DefaultController extends Controller
         // On récupère tous les liens de la BDD
         // Pour la scalabilité écrire une fonction qui limite aux 10 derniers liens
         // Ou les liens les plus populaires...
-        $links = $linkToRepo->findAll();
+        $popularLinks = $linkToRepo->findPopularLinks();
+        $lastAddedLinks = $linkToRepo->findLastAddedLinks();
 
         // Traitement du formulaire
         $form->handleRequest($request);
@@ -46,7 +45,8 @@ class DefaultController extends Controller
         // pour ce soit facilement lisible
         return $this->render('TinyUrlMainBundle:Default:index.html.twig', [
                 'form'=>$form->createView(),
-                'links'=>$links
+                'popularLinks'=>$popularLinks,
+                'lastAddedLinks'=>$lastAddedLinks
             ]);
     }
 
