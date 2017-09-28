@@ -36,4 +36,12 @@ class LinkRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->execute();
     }
+
+    public function findLastComment() {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.createdAt', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->execute();
+    }
 }

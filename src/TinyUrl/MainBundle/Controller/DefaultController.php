@@ -56,7 +56,6 @@ class DefaultController extends Controller
             $em->persist($link);
             $em->flush();
             $this->addFlash('success', 'Un shortcode a été crée !');
-
         }
 
         // Bien présenter les données que l'on retourne avec la vue
@@ -83,7 +82,7 @@ class DefaultController extends Controller
 
         if( !$lien) {
             // Si la base de donnée ne renvoie rien
-            $this->addFlash('noMatchFound', 'Ce shortcode n\'existe pas !');
+            $this->addFlash('error', 'Ce shortcode n\'existe pas !');
             return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
         }
 
@@ -100,5 +99,14 @@ class DefaultController extends Controller
         $em->flush();
         $this->addFlash('success', 'Le lien a été supprimé');
         return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
+    }
+
+    public function lastCommentAction() {
+        $em = $this->get('doctrine')->getManager();
+        $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
+        $lastComment = $linkToRepo->findLastComment();
+        return $this->render('@TinyUrlMain/Default/Ajax/lastComment.html.twig', [
+           'lastComment'=>$lastComment
+        ]);
     }
 }

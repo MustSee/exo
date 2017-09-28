@@ -9,7 +9,7 @@ div.container-fluid {
 form {
     padding-bottom: 150px;
     padding-top: 50px;
-    width: 50%;
+    width: 80%;
     margin: auto;
 }
 
@@ -37,4 +37,14 @@ td, th {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/* AJAX */
+
+.row.mt-5 {
+    -ms-flex-direction: column;
+}
+
+.clickLastComment {
+    margin-bottom: 16px;
 }

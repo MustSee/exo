@@ -1,0 +1,5 @@
+<p>
+    {%  for comment in lastComment %}
+    Le {{ comment.createdAt | date('d-m \\à H:i:s') }}
+    {% endfor %}
+</p>

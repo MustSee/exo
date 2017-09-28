@@ -38,6 +38,9 @@
 <!-- JAVASCRIPT -->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('bundles/tinyurlmain/js/tabsTinyUrl.js') }}"></script>
     {% block javascripts %}
         <script type="text/javascript" src="{{ asset('bundles/tinyurlmain/js/bootstrap.min.js') }}"></script>
     {% endblock javascripts %}

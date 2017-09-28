@@ -13,3 +13,9 @@ tiny_url_main_delete:
     defaults:  { _controller: TinyUrlMainBundle:Default:delete}
     requirements:
       id: \d+
+
+tiny_url_main_last_comment:
+    path: /lastcomment
+    defaults: {_controller: TinyUrlMainBundle:Default:lastComment}
+    options:
+        expose: true
