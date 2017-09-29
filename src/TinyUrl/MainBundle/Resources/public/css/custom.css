@@ -19,7 +19,7 @@ form {
 
 #tinyurl_mainbundle_link_longUrl:focus {
     border-color: rgba(185, 204, 219, 0.6);
-    background-color: rgba(157, 219, 147, 0.28);
+    background-color: rgba(120, 234, 255, 0.24);
     color : black;
 }
 
@@ -111,4 +111,40 @@ div.alert {
 
 div.alert p {
     margin: 0;
+}
+
+/* MENU */
+/* Style the links inside the sidenav */
+#mySidenav a {
+    position: absolute; /* Position them relative to the browser window */
+    left: -100px; /* Position them outside of the screen */
+    transition: 0.5s; /* Add transition on hover */
+    padding: 15px; /* 15px padding */
+    width: 200px; /* Set a specific width */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    color: white; /* White text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
+
+#mySidenav a:hover {
+    z-index: 3;
+    left: 0; /* On mouse-over, make the elements appear as they should */
+    text-align: right;
+}
+
+/* The about link: 20px from the top with a green background */
+#about {
+    top: 320px;
+    background-color: #096D7F;
+}
+
+#projects {
+    top: 385px;
+    background-color: #0FAECC;
+}
+
+#contact {
+    top: 450px;
+    background-color: #627B7F;
 }
