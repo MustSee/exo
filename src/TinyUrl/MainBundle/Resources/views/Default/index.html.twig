@@ -15,7 +15,7 @@
 </div>
 
     <div class="row">
-        <div class="offset-3 col-6">
+        <div class="offset-2 col-8">
             <div class="tab">
                 <ul>
                     <li class="active" id="lastAdded"><a href="#">Derniers liens ajoutés</a></li>
@@ -27,9 +27,10 @@
                 <table class="table table-hover lastLinks">
                     <thead>
                     <tr>
-                        <th class="col-4">URL</th>
-                        <th class="col-4">ShortCode</th>
-                        <th class="col-4">Crée le</th>
+                        <th class="col-3">URL</th>
+                        <th class="col-3">ShortCode</th>
+                        <th class="col-3">Lien crée le</th>
+                        <th class="col-3">Statistiques</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +38,8 @@
                         <tr>
                             <td>{{ element.longUrl }}</td>
                             <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
-                            <td>{{ element.createdAt|date('d-m') }}</td>
+                            <td>{{ element.createdAt|date('d-m-y') }}</td>
+                            <td><i class="fa fa-line-chart" style="color: darkred;"></i></td>
                         </tr>
                     {% endfor %}
                     </tbody>
