@@ -12,14 +12,18 @@ $('#lastAdded').click(function (e) {
 	var lastAddedLinks = Routing.generate('tiny_url_main_last_added');
 	$('.ajaxTables').load(lastAddedLinks, function (data) {
 		$(this).html(data);
+		$('.active').removeClass('active');
+		$('#lastAdded').addClass('active');
 	});
 });
 
-$('#popularLinks').click(function (e) {
 
+$('#popularLinks').click(function (e) {
 	e.preventDefault();
 	var popularLinks = Routing.generate('tiny_url_main_popular_links');
 	$('.ajaxTables').load(popularLinks, function (data) {
 		$(this).html(data);
+		$('.active').removeClass('active');
+		$('#popularLinks').addClass('active');
 	});
 });

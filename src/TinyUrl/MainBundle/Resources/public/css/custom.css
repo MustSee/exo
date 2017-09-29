@@ -18,8 +18,8 @@ form {
 }
 
 #tinyurl_mainbundle_link_longUrl:focus {
-    border-color: blue;
-    background-color: rgba(219, 124, 219, 0.12);
+    border-color: rgba(185, 204, 219, 0.6);
+    background-color: rgba(157, 219, 147, 0.28);
     color : black;
 }
 
@@ -74,7 +74,7 @@ div.tab li {
 }
 
 div.tab li:hover {
-    background-color: #DDD;
+    background-color: rgba(149, 191, 211, 0.63);
 }
 
 div.tab li:hover a {
@@ -83,7 +83,7 @@ div.tab li:hover a {
 }
 
 div.tab li.active {
-    background-color: #CCC;
+    background-color: rgba(185, 204, 219, 0.6);
 }
 
 div.tab li a {
@@ -92,4 +92,23 @@ div.tab li a {
 
 table a:hover {
     text-decoration: none;
+}
+
+/* OVERLAY */
+@keyframes heightAlert {
+    from {transform: translate(0px, -100px)}
+    to {}
+}
+
+div.alert {
+    position:fixed;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+    animation-name: heightAlert;
+    animation-duration: 1s;
+}
+
+div.alert p {
+    margin: 0;
 }

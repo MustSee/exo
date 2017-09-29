@@ -15,8 +15,6 @@
 </head>
 
 <body>
-<div class="container-fluid">
-
     {#FLASH MESSAGES#}
     {% for message in app.flashes("error") %}
         <div class="alert alert-danger" role="alert">
@@ -28,6 +26,7 @@
             <p>{{ message }}</p>
         </div>
     {% endfor %}
+<div class="container-fluid">
 
     {#BLOCK BODY#}
     {% block body %} {% endblock %}
