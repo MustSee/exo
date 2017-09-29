@@ -18,8 +18,9 @@ form {
 }
 
 #tinyurl_mainbundle_link_longUrl:focus {
-    border-color: yellowgreen;
-    background-color: lightyellow;
+    border-color: blue;
+    background-color: rgba(219, 124, 219, 0.12);
+    color : black;
 }
 
 #tinyurl_mainbundle_link_valider {
@@ -29,6 +30,10 @@ form {
 
 
 /* TABLEAU */
+
+table {
+    border-left: 1px solid #c1c1c1;
+}
 
 td, th {
     text-align: center;
@@ -47,4 +52,44 @@ td, th {
 
 .clickLastComment {
     margin-bottom: 16px;
+}
+
+/* TABS */
+
+div.tab ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+div.tab li {
+    background-color: #F1F1F1;
+    border: 1px solid #CCC;
+    border-bottom: none;
+    border-radius: 10px 20px 0 0;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    list-style: none;
+}
+
+div.tab li:hover {
+    background-color: #DDD;
+}
+
+div.tab li:hover a {
+    color: blue;
+
+}
+
+div.tab li.active {
+    background-color: #CCC;
+}
+
+div.tab li a {
+    text-decoration: none;
+}
+
+table a:hover {
+    text-decoration: none;
 }

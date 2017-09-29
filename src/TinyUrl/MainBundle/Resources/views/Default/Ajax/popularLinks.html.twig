@@ -1,0 +1,18 @@
+<table class="table table-hover popularLinks">
+    <thead>
+    <tr>
+        <th class="col-4">URL</th>
+        <th class="col-4">ShortCode</th>
+        <th class="col-4">Nbr de vues</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for element in popularLinks %}
+        <tr>
+            <td>{{ element.longUrl }}</td>
+            <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
+            <td>{{ element.counter }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

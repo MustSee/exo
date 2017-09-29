@@ -19,3 +19,15 @@ tiny_url_main_last_comment:
     defaults: {_controller: TinyUrlMainBundle:Default:lastComment}
     options:
         expose: true
+
+tiny_url_main_last_added:
+    path: /lastadded
+    defaults: {_controller: TinyUrlMainBundle:Default:lastAdded}
+    options:
+        expose: true
+
+tiny_url_main_popular_links:
+    path: /popularLinks
+    defaults: {_controller: TinyUrlMainBundle:Default:popularLinks}
+    options:
+        expose: true

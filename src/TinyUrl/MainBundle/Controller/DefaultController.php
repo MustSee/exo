@@ -101,6 +101,8 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('tiny_url_main_homepage'));
     }
 
+    //    Ajax calls
+
     public function lastCommentAction() {
         $em = $this->get('doctrine')->getManager();
         $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
@@ -109,4 +111,25 @@ class DefaultController extends Controller
            'lastComment'=>$lastComment
         ]);
     }
+
+
+    public function lastAddedAction() {
+        $em = $this->get('doctrine')->getManager();
+        $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
+        $lastAddedLinks = $linkToRepo->findLastAddedLinks();
+        return $this->render('TinyUrlMainBundle:Default/Ajax:lastAddedLinks.html.twig', [
+            'lastAddedLinks'=>$lastAddedLinks
+        ]);
+
+    }
+
+    public function popularLinksAction() {
+        $em = $this->get('doctrine')->getManager();
+        $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
+        $popularLinks = $linkToRepo->findPopularLinks();
+        return $this->render('TinyUrlMainBundle:Default/Ajax:popularLinks.html.twig', [
+            'popularLinks'=>$popularLinks
+        ]);
+    }
+
 }

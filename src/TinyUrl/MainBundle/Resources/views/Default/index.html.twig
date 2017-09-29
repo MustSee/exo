@@ -3,10 +3,7 @@
 {% block body %}
 <div class="row">
     <div class="col-2">
-            <p>Ajax avec Symfony</p>
-            <button class="clickLastComment">Last Link added</button>
-            <p class="lastComment">
-            </p>
+
     </div>
     <div class="col-8">
         {{ form_start(form) }}
@@ -18,47 +15,35 @@
 </div>
 
     <div class="row">
-        <div class="col-5">
-            <h2>Derniers liens ajoutés -> </h2>
-            <table class="table table-hover lastLinks">
-                <thead>
-                <tr>
-                    <th class="col-4">URL</th>
-                    <th class="col-4">ShortCode</th>
-                    <th class="col-4">Crée le</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for element in lastAddedLinks %}
+        <div class="offset-3 col-6">
+            <div class="tab">
+                <ul>
+                    <li id="lastAdded"><a href="#">Derniers liens ajoutés</a></li>
+                    <li id="popularLinks"><a href="#">Liens les plus populaires</a></li>
+                </ul>
+            </div>
+
+            <div class="ajaxTables">
+                <table class="table table-hover lastLinks">
+                    <thead>
                     <tr>
-                        <td>{{ element.longUrl }}</td>
-                        <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
-                        <td>{{ element.createdAt|date('d-m') }}</td>
+                        <th class="col-4">URL</th>
+                        <th class="col-4">ShortCode</th>
+                        <th class="col-4">Crée le</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div class="col-5 offset-2">
-            <h2>Liens les plus populaires -></h2>
-            <table class="table table-hover popularLinks">
-                <thead>
-                <tr>
-                    <th class="col-4">URL</th>
-                    <th class="col-4">ShortCode</th>
-                    <th class="col-4">Nbr de vues</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for element in popularLinks %}
-                    <tr>
-                        <td>{{ element.longUrl }}</td>
-                        <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
-                        <td>{{ element.counter }}</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for element in lastAddedLinks %}
+                        <tr>
+                            <td>{{ element.longUrl }}</td>
+                            <td><a href="{{ path('tiny_url_main_redirect', {'shortcode': element.shortCode}) }}">{{ element.shortCode }}</a></td>
+                            <td>{{ element.createdAt|date('d-m') }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 
