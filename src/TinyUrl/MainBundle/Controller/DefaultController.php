@@ -103,16 +103,6 @@ class DefaultController extends Controller
 
     //    Ajax calls
 
-    public function lastCommentAction() {
-        $em = $this->get('doctrine')->getManager();
-        $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');
-        $lastComment = $linkToRepo->findLastComment();
-        return $this->render('@TinyUrlMain/Default/Ajax/lastComment.html.twig', [
-           'lastComment'=>$lastComment
-        ]);
-    }
-
-
     public function lastAddedAction() {
         $em = $this->get('doctrine')->getManager();
         $linkToRepo = $em->getRepository('TinyUrlMainBundle:Link');

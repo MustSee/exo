@@ -6,8 +6,19 @@
 
     </div>
     <div class="col-8">
-        {{ form_start(form) }}
-        {{ form_row(form.longUrl) }}
+        {{ form_start(form, {
+            'attr' : {
+                'novalidate': 'novalidate',
+            }
+        }) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.longUrl, {
+            'attr' : {
+                'autocomplete':"off",
+                'placeholder':'Collez ici l\'URL à raccourcir',
+                'label': 'the hexk'
+            }
+        }) }}
         {{ form_row(form.valider) }}
         {{ form_end(form) }}
     </div>
